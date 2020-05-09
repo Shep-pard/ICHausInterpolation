@@ -376,7 +376,7 @@ Wire Wire Line
 	4350 3650 4350 3900
 Connection ~ 3750 3900
 Wire Wire Line
-	3750 4150 4450 4150
+	3750 4150 4100 4150
 Wire Wire Line
 	4450 3750 4450 4150
 Connection ~ 3750 4150
@@ -650,7 +650,7 @@ L stmbl:R R1
 U 1 1 5EB33D8B
 P 1700 4450
 F 0 "R1" H 1770 4496 50  0000 L CNN
-F 1 "R" H 1770 4405 50  0000 L CNN
+F 1 "120" H 1770 4405 50  0000 L CNN
 F 2 "stmbl:C_0805" V 1630 4450 50  0001 C CNN
 F 3 "" H 1700 4450 50  0000 C CNN
 	1    1700 4450
@@ -907,7 +907,7 @@ F 1 "CONN_01X02" H 1100 3350 50  0000 C CNN
 F 2 "stmbl:RM3.5_1x2" H 1200 3350 50  0001 C CNN
 F 3 "" H 1200 3350 50  0000 C CNN
 	1    1200 3350
-	-1   0    0    1   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L stmbl:CONN_01X02 P3
@@ -918,7 +918,7 @@ F 1 "CONN_01X02" H 1100 3550 50  0000 C CNN
 F 2 "stmbl:RM3.5_1x2" H 1200 3550 50  0001 C CNN
 F 3 "" H 1200 3550 50  0000 C CNN
 	1    1200 3550
-	-1   0    0    1   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L stmbl:CONN_01X02 P4
@@ -929,7 +929,7 @@ F 1 "CONN_01X02" H 1100 3750 50  0000 C CNN
 F 2 "stmbl:RM3.5_1x2" H 1200 3750 50  0001 C CNN
 F 3 "" H 1200 3750 50  0000 C CNN
 	1    1200 3750
-	-1   0    0    1   
+	-1   0    0    -1  
 $EndComp
 $Comp
 L stmbl:CONN_01X02 P1
@@ -1515,4 +1515,63 @@ $EndComp
 Wire Wire Line
 	6350 3050 6350 3100
 Connection ~ 6350 3100
+$Comp
+L Jumper:SolderJumper_2_Open JP11
+U 1 1 5EB924C7
+P 2700 4950
+F 0 "JP11" V 2654 5018 50  0000 L CNN
+F 1 "SolderJumper_2_Open" H 2300 4850 50  0000 L CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 2700 4950 50  0001 C CNN
+F 3 "~" H 2700 4950 50  0001 C CNN
+	1    2700 4950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2700 4800 2700 4750
+$Comp
+L power:GND #PWR0111
+U 1 1 5EBA1883
+P 2700 5150
+F 0 "#PWR0111" H 2700 4900 50  0001 C CNN
+F 1 "GND" H 2705 4977 50  0000 C CNN
+F 2 "" H 2700 5150 50  0001 C CNN
+F 3 "" H 2700 5150 50  0001 C CNN
+	1    2700 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2700 5100 2700 5150
+$Comp
+L Jumper:SolderJumper_2_Open JP12
+U 1 1 5EBB0393
+P 4100 4350
+F 0 "JP12" V 4054 4418 50  0000 L CNN
+F 1 "SolderJumper_2_Open" H 3700 4250 50  0000 L CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm" H 4100 4350 50  0001 C CNN
+F 3 "~" H 4100 4350 50  0001 C CNN
+	1    4100 4350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4100 4200 4100 4150
+Connection ~ 4100 4150
+Wire Wire Line
+	4100 4150 4450 4150
+$Comp
+L power:+5F #PWR0112
+U 1 1 5EBBF590
+P 4350 4500
+F 0 "#PWR0112" H 4350 4350 50  0001 C CNN
+F 1 "+5F" H 4365 4673 50  0000 C CNN
+F 2 "" H 4350 4500 50  0001 C CNN
+F 3 "" H 4350 4500 50  0001 C CNN
+	1    4350 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 4500 4100 4550
+Wire Wire Line
+	4100 4550 4350 4550
+Wire Wire Line
+	4350 4550 4350 4500
 $EndSCHEMATC
