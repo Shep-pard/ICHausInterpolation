@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name ICHaus)(type Legacy)(uri ${KIPRJMOD}/ICHaus.lib)(options "")(descr ""))
+  (lib (name ICHaus-rescue)(type Legacy)(uri ${KIPRJMOD}/ICHaus-rescue.lib)(options "")(descr ""))
 )
