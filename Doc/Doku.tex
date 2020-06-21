@@ -1,0 +1,207 @@
+\documentclass{scrartcl}
+%\usepackage{german}
+\usepackage[latin1]{inputenc}
+\usepackage[german]{babel}
+
+% zusätzliche mathematische Symbole, AMS=American Mathematical Society 
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{array}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% fürs Einbinden von Graphiken
+\usepackage{graphicx}
+
+% für Namen etc. in Kopf- oder Fußzeile
+\usepackage{fancyhdr}
+
+% erlaubt benutzerdefinierte Kopfzeilen 
+\pagestyle{fancy}
+
+
+
+
+% Definition der Kopfzeile
+\lhead{
+ICHaus Interpolationsplatine Anleitung
+}
+\chead{}
+\rhead{\today{}}
+\lfoot{}
+\cfoot{Seite \thepage}
+\rfoot{} 
+
+
+\begin{document}
+
+
+\begin{titlepage}
+	\begin{center}
+		\vspace*{1cm}
+		
+		\Huge
+		\textbf{ICHaus Interpolationsplatine}
+		
+		\vspace{0.5cm}
+		\LARGE
+		Kurzanleitung
+		
+		\vspace{1.5cm}
+		
+		\textbf{Sören Alrutz}
+		
+		\vfill
+		
+		Platine zum Wandeln von 1Vpp und 11$\mu$Ass Signalen zu 5V TLL Level
+		
+		\vspace{0.8cm}
+		
+		
+		
+		\Large
+		\today
+		
+	\end{center}
+\end{titlepage}
+
+
+\section{Disclaimer}
+
+Die Anleitung wurde nach bestem Wissen und Gewissen geschrieben, allerdings nicht sonderlich Intensiv auf sprachliche/Inhaltliche Fehler geprüft.
+Die Platine wurde fast vollständig nach Schaltplänen und Vorschlägen des Datenblatts aufgebaut. Hier sind alle Information auch noch genauer erklärt. Schaltpläne und Layout sind auf meinen Github zu finden: \url{https://github.com/Shep-pard/ICHausInterpolation}
+
+\section{Basics zum Verwendeten IC}
+
+Die Platine basiert auf dem ICHaus IC-NV IC. Dies ist ein vollintegrierter 6 Bit Sin/Cos Interpolationschip. Durch die 6 Bit ist eine Auflösung von 64 Pulsen pro Periode möglich. Dies entspricht einer 16-fachen Interpolation des sinusförmigen Signals.\\
+Die Eingangssignale dürfen bei maximaler Interpolation noch eine Frequenz von 200kHz haben. Bei niedrigeren Faktoren ist eine maximale Frequenz bis zu 320kHz möglich. Das Referenzsignal des Eingangs kann über einen Komparator ausgegeben werden.
+
+\section{Aufbau der Platine}
+
+Abbildung \ref{fig:total} zeigt eine der Platinen von der Seite. An der unteren Seite sind die Steckverbinder. Es können jeweils sowohl 9 Pin D-Sub Buchsen als auch 2Pin 3,5mm Pitch Steckverbinder verwendet werden. Der linke Stecker ist der Eingang für Encoder/GMS. Der rechte Stecker geht an die Auswertung und versorgt die Platine mit 5V. Seitlich neben dem GMS Eingang ist noch ein weiterer 2 Pin Steckverbinder. Dieser ist zum Anschluss des Schirms des GMS gedacht wenn kein D-Sub Verbinder verwendet wird.
+
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{total.jpg}
+	\end{center}
+	\caption{Gesamtansicht der Platine}
+	\label{fig:total}
+\end{figure} 
+
+
+Des weiteren ist auf der Platine auf der linken Seite ein Operationsverstärker zur Interpretation des Referenzimpuls verbaut. In der Mitte ist der IC-NV und rechts davon ein 4 Kanal Differentialtreiber um die Signale des IC-NV Störungssicher auszugeben.
+
+
+
+\section{Steckverbinder Pinout}
+
+\subsection*{D-Sub}
+Das Pinout der D-Sub Verbinder ist für beide fast identisch. Auf Tabelle \ref{tab:dsub} sind beide Pinouts aufgelistet. Der Unterschied ist nur der dedizierte Schirm Anschluss für den Encoder/GMS.
+
+\begin{table}[h]
+	\centering
+	\caption{Pinout D-Sub 9 Verbinder}
+	\label{tab:dsub}
+	\begin{tabular}{c|ll}
+		Pin &  TTL Output	& Encoder/GMS Eingang \\
+		\midrule
+		1 	&GND 			& Schirm\\
+		2 	&Z- 				&Z-\\
+		3 	&B- 				&B-\\
+		4 	&A- 				&A-\\
+		5 	&5V In				&5V Out\\
+		6 	&GND				&GND\\
+		7 	&Z+ 				&Z+\\
+		8 	&B+ 				&B+\\
+		9 	&A+ 				&A+
+	\end{tabular}
+\end{table}
+
+\subsection*{3,5mm Schraubklemmen}
+
+Zur Verdrahtung der Schraubklemmen ist jeder Pin auf der Platine einzeln beschriftet. Nur für den Schirm des Encoder/GMS Anschluss ist eine extra Schraubklemme vorhanden.\\
+\textbf{Fehler bei der Beschriftung: Bei P5 steht neben "Schirm" fälschlicherweise 5V und GND. Das kann ignoriert werden!}
+
+
+\section{Platine Einstellen}
+Die Platine ist standardmäßig für die Verwendung mit 11$\mu$Ass ausgelegt.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{top.jpg}
+	\end{center}
+	\caption{Top Ansicht der Platine}
+	\label{fig:top}
+\end{figure} 
+
+\subsection*{11$\mu$Ass}
+
+Zur Auswertung von 11$\mu$Ass Signalen müssen auf der Platine einige Grundvoraussetzungen erfüllt sein:
+\begin{itemize}
+	\item R1-R4 müssen 25k$\Omega$ sein
+	\item JP2/JP3 offen 
+	\item JP4/JP5 geschlossen
+\end{itemize}
+
+Um den Referenzimpuls auszuwerten muss zusätzlich \textit{JP12} geschlossen sowie \textit{JP\_ZN} und \textit{JP\_VP} auf lo sein.
+
+Der Gain kann auf zwischen 4 oder 7,1 mit den Jumpern \textit{SG0} und \textit{SG1} gestellt werden. Wenn das Ergebnis nicht zufriedenstellend ist, muss der Gain eventuell experimentell angepasst werden.
+
+
+\subsection*{1VPP}
+
+\begin{itemize}
+	\item R2 und R4 müssen 120$\Omega$ sein
+	\item JP2/JP3 geschlossen 
+	\item JP4/JP5 geschlossen
+\end{itemize}
+
+Um den Referenzimpuls auszuwerten muss zusätzlich \textit{JP12-JP15} offen sowie \textit{JP\_ZN} und \textit{JP\_VP} auf high sein.
+
+Der Gain kann auf zwischen 3 oder 4 mit den Jumpern \textit{SG0} und \textit{SG1} gestellt werden. Wenn das Ergebnis nicht zufriedenstellend ist, muss der Gain eventuell experimentell angepasst werden.
+
+
+\subsection*{Referenzsignal}
+
+Das Referenzsignal des Encoder/GMS kann entweder ausgewertet werden oder es kann automatisch ein Impuls jede Periode erzeugt werden. Für die automatische Signalerzeugung \textit{JP13/JP14} schließen.\\
+
+\noindent
+Für die Auswertung muss das Poti POT2 korrekt eingestellt werden. Zur Erklärung sind auf Abbildung \ref{fig:1uass} die analogen Signale eines 11$\mu$Ass GMS abgebildet. Das Referenzsignal ist die rote Kurve unten. Das Poti verändert das blaue Signal.
+Zur Auswertung des Referenzimpuls ist sowohl das blaue als auch das rote Signal an einen Komperator angeschlossen. Wenn die rote Kurve über der blauen ist, wird in der Sinusperiode ein Referenzimpuls ausgegeben.
+
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{11uass.jpg}
+	\end{center}
+	\caption{Analoge Signale von einem GMS}
+	\label{fig:1uass}
+\end{figure}
+
+Um das Poti einzustellen, können die Spannungen entweder mit einem Oszilloskop gemessen und angepasst werden oder mit Hilfe von LinuxCNC ausgewertet werden. Zur Auswertung in LinuxCNC das Halscope öffnen und Encoder A/B/Index Signale anzeigen und auf das Index Signal triggern. Immer über den Referenzimpuls fahren und das Poti einstellen bis nur noch ein Referenzimpuls angezeigt wird. Siehe Abbildung \ref{fig:linuxcnc}
+
+
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{linuxcnc.jpg}
+	\end{center}
+	\caption{Auswertung des Encoders/GMS in Linuxcnc}
+	\label{fig:linuxcnc}
+\end{figure}
+
+
+
+\subsection*{Ausgangssignale}
+
+Der Output der TTL Signale kann normal oder differentiell übertragen werden. Standardmäßig wird ein differentielles Signal ausgegeben. Wenn dies nicht gewünscht ist, muss mit einem Messer \textit{JP7} aufgetrennt werden und \textit{JP8-JP10} geschlossen werden.
+
+
+
+
+
+\end{document}
